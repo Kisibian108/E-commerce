@@ -1,10 +1,5 @@
 package com.ecommerce.dto.request;
 
-import lombok.Data;
+public record LoginRequest(String username, String password) {
 
-@Data
-public class LoginRequest {
-
-    String username;
-    String password;
 }
