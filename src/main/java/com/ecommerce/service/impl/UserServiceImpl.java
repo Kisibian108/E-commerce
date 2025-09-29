@@ -5,10 +5,12 @@ import com.ecommerce.dto.request.ResetPasswordRequest;
 import com.ecommerce.dto.request.UserRequest;
 import com.ecommerce.dto.response.ApiResponse;
 import com.ecommerce.dto.response.OtpResponse;
+import com.ecommerce.entity.Roles;
 import com.ecommerce.entity.Users;
 import com.ecommerce.exception.AppException;
 import com.ecommerce.exception.ErrorCode;
 import com.ecommerce.mapper.UserMapper;
+import com.ecommerce.repository.RoleRepository;
 import com.ecommerce.repository.UserRepository;
 import com.ecommerce.service.UserService;
 import lombok.AccessLevel;
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
     EmailService emailService;
     OtpService otpService;
+    RoleRepository roleRepository;
 
     @Override
     public ApiResponse<Object> register(UserRequest userRequest) {
@@ -39,6 +42,11 @@ public class UserServiceImpl implements UserService {
 
         Users users = userMapper.toUser(userRequest);
         users.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+
+        Roles userRole = roleRepository.findByName("ROLE_USER")
+                .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+
+        users.getRoles().add(userRole);
 
         userRepository.save(users);
 

@@ -23,6 +23,13 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    public static <T> ApiResponse<T> success() {
+        return ApiResponse.<T>builder()
+                .code(1000)
+                .message("success")
+                .build();
+    }
+
     public static <T> ApiResponse<T> error(int code, String message) {
         return ApiResponse.<T>builder()
                 .code(code)

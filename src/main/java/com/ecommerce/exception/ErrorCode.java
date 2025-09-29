@@ -13,7 +13,8 @@ public enum ErrorCode {
     INVALID_PASSWORD(1004, "Password must be at least 8 characters"),
     USER_NOT_FOUND(1005, "User not found"),
     INVALID_OTP(1006, "Invalid OTP"),
-    ;
+    ROLE_NOT_FOUND(1006,"Role not found" ),
+    PRODUCT_NOT_FOUND(1007, "Product not found" ),;
 
     private final int code;
     private final String message;

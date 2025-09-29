@@ -36,8 +36,9 @@ public class AuthController {
 
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
+            String token = jwtUtil.generateToken(loginRequest.username());
 
-            return ApiResponse.builder().result((jwtUtil.generateToken(loginRequest.username()))).code(1000).build();
+            return ApiResponse.success(token);
         } catch (AuthenticationException e) {
             throw new AppException(ErrorCode.INVALID_USERNAME_OR_PASSWORD);
         }

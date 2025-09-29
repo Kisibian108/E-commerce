@@ -1,4 +1,4 @@
 package com.ecommerce.dto.request;
 
-public record ResetPasswordRequest(String email,String otp, String newPassword) {
+public record ResetPasswordRequest(String email,String otp, String newPassword,String confirmNewPassword) {
 }

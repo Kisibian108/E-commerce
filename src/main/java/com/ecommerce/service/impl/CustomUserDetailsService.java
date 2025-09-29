@@ -25,6 +25,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return User.withUsername(user.getUsername())
                 .password(user.getPassword()) // phải là password đã mã hoá (BCrypt)
-                .roles(user.getRole() != null ? user.getRole() : "USER")
+//                .roles(user.getRoles() != null ? user.getRoles() : "USER")
                 .build();    }
 }
