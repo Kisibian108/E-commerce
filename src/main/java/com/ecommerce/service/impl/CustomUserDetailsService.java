@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
         return User.withUsername(user.getUsername())
-                .password(user.getPassword()) // phải là password đã mã hoá (BCrypt)
-//                .roles(user.getRoles() != null ? user.getRoles() : "USER")
+                .password(user.getPassword())
+                .roles((user.getRoles() != null ? user.getRoles() : "USER").toString())
                 .build();    }
 }

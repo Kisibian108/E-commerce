@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -39,16 +40,19 @@ public class ProductController {
     }
 
     @PostMapping("/insert")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> insertProduct(@RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok(productService.save(productRequest));
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> updateProduct(@PathVariable UUID id, @RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok(productService.update(productRequest, id));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> deleteProduct(@PathVariable UUID id) {
         return ResponseEntity.ok(productService.delete(id));
     }
