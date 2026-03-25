@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.config.JwtUtil;
+import com.ecommerce.configuration.JwtUtil;
 import com.ecommerce.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

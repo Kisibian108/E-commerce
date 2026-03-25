@@ -1,4 +1,4 @@
-package com.ecommerce.config;
+package com.ecommerce.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and()
                 .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers("/api/auth/**","/products/getAll").permitAll().
+                        authorizeRequests.requestMatchers("/api/auth/**","/products/getAll","/products/{id}","cart/**").permitAll().
                                 anyRequest().authenticated());
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -64,7 +64,6 @@ public class SecurityConfig {
             }
         };
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

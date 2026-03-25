@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.config.JwtUtil;
+import com.ecommerce.configuration.JwtUtil;
 import com.ecommerce.dto.request.ChangePasswordRequest;
 import com.ecommerce.dto.request.LoginRequest;
 import com.ecommerce.dto.request.ResetPasswordRequest;

@@ -4,18 +4,17 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Products extends BaseEntity {
+public class CartItem extends BaseEntity {
 
-    String name;
-    String description;
-    Double price;
-    Integer stock;
-    String imageUrl;
-    Long categoryId;
+    UUID userId;
+    UUID productId;
+    Integer quantity;
 }

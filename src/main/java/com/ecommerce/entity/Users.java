@@ -1,5 +1,6 @@
 package com.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +22,8 @@ public class Users extends BaseEntity {
     String password;
     String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

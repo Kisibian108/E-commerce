@@ -1,5 +1,6 @@
 package com.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import lombok.*;
@@ -13,11 +14,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@FieldDefaults(level= AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Roles extends BaseEntity {
 
     String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonBackReference
     Set<Users> users = new HashSet<>();
 }

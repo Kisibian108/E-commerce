@@ -1,14 +1,14 @@
-package com.ecommerce.config;
+package com.ecommerce.configuration;
 
 import com.ecommerce.entity.Users;
 import com.ecommerce.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -31,7 +31,7 @@ public class JwtUtil {
                 .claim("roles", buildScope(username))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(SignatureAlgorithm.HS256, Decoders.BASE64.decode(secretKey))
                 .compact();
     }
 
