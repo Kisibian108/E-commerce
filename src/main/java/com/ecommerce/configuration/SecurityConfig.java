@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().cors().and()
+        http.csrf().disable().cors(cors -> {})
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers("/api/auth/**","/products/getAll","/products/{id}","cart/**").permitAll().
                                 anyRequest().authenticated());
