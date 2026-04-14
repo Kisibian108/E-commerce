@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         String otp = otpService.generateOtp(key);
         emailService.sendEmail(user.get().getEmail(), "OTP confirmation", "Mã opt của bạn là " + otp);
 
-        return ApiResponse.success(otp);
+        return ApiResponse.success();
     }
 
     @Override

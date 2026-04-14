@@ -14,7 +14,7 @@ public interface ProductService {
 
     ApiResponse<PagedResponse<Products>> getAllProducts(Pageable pageable, String name);
 
-    ApiResponse<Products> save(ProductRequest productRequest, MultipartFile image) throws IOException;
+    ApiResponse<Products> save(ProductRequest productRequest) throws IOException;
 
     ApiResponse<Void> update(ProductRequest productRequest, UUID id);
 

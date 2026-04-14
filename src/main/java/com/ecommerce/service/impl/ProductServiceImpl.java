@@ -43,30 +43,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ApiResponse<Products> save(ProductRequest productRequest, MultipartFile image) throws IOException {
+    public ApiResponse<Products> save(ProductRequest productRequest) {
         Products newProduct = productMapper.toProduct(productRequest);
-        String imageUrl = uploadFile(image);
-        newProduct.setImageUrl(imageUrl);
+
+        newProduct.setImageUrl(productRequest.getImageUrl());
+
         productRepository.save(newProduct);
+
         return ApiResponse.success(newProduct);
-    }
-
-    private String uploadFile(MultipartFile file) throws IOException {
-        // Tạo thư mục nếu chưa có
-        File directory = new File(uploadDir);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-
-        // Tạo tên file duy nhất
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        Path filePath = Paths.get(uploadDir, fileName);
-
-        // Lưu file
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        // Trả về đường dẫn public
-        return "/files/" + fileName;
     }
 
     @Override
@@ -76,7 +60,11 @@ public class ProductServiceImpl implements ProductService {
             throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
         }
         productMapper.toUpdateProduct(currentProduct.get(), productRequest);
+        if (productRequest.getImageUrl() != null && !productRequest.getImageUrl().isEmpty()) {
+            currentProduct.get().setImageUrl(productRequest.getImageUrl());
+        }
         productRepository.save(currentProduct.get());
+        System.out.println("IMAGE FROM FE: " + productRequest.getImageUrl());
 
         return ApiResponse.success();
     }
